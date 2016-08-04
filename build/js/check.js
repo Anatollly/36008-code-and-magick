@@ -13,8 +13,8 @@ var getMessage = function (a, b) {
   } else if (typeof a == 'number') {
     message = 'Я прыгнул на ' + a * 100 + ' сантиметров';
 
-  } else if (typeof a == 'object') {
-    if (typeof b == 'object') {
+  } else if (a instanceof Array) {
+    if (b instanceof Array) {
       for (i = 0; i < a.length; i++) {
         length += a[i] * b[i];
       }
