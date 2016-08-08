@@ -394,19 +394,65 @@ window.Game = (function() {
     /**
      * Отрисовка экрана паузы.
      */
+    _writeScreenMessage: function(message) {
+
+      var lines = [];
+      var messageWidth = 300;
+      var words = message.split(' ');
+      var line = '';
+
+      this.ctx.font = '16px "PT Mono"';
+
+      for (var i = 0; i < words.length; i++) {
+        var testLine = line + words[i] + ' ';
+        var testWidth = this.ctx.measureText(testLine).width;
+        if ((testWidth > (messageWidth - 20)) && (i === words.length - 1)) {
+          lines.push(line);
+          line = words[i] + ' ';
+          lines.push(line);
+        } else if (testWidth > (messageWidth - 20)) {
+          lines.push(line);
+          line = words[i] + ' ';
+        } else if (i === words.length - 1) {
+          line = testLine;
+          lines.push(line);
+        } else {
+          line = testLine;
+        }
+      }
+
+      var messageHeight = lines.length * 24 + 20;
+
+      this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+      this.ctx.fillRect(320, 70, messageWidth, messageHeight);
+      this.ctx.fillStyle = '#ffffff';
+      this.ctx.fillRect(310, 60, messageWidth, messageHeight);
+      this.ctx.fillStyle = '#000000';
+      this.ctx.textBaseline = 'hanging';
+      for (var j = 0; j < lines.length; j++) {
+        this.ctx.fillText(lines[j], 320, 50 + (j + 1) * 24);
+      }
+    },
+
     _drawPauseScreen: function() {
+
+      var winMessage = 'Ура! Ты победил. Нажми на пробел, чтобы повторить свой успех.';
+      var failMessage = 'Не получилось, не рассраивайся. Нажми на пробел, чтобы победить.';
+      var pauseMessage = 'Игра на паузе. Нажми на пробел чтобы вернуться и помочь Пенадьфу победить.';
+      var introMessage = 'Привет, я Пендальф Синий. Помоги мне изменить мир. Для начали игры нажми на пробел. Можешь управлять моими ' + 'перемещениями c помощью стрелок. И я буду стрелять огненными шарами по клику на кнопку Shift.';
+
       switch (this.state.currentStatus) {
         case Verdict.WIN:
-          console.log('you have won!');
+          this._writeScreenMessage(winMessage);
           break;
         case Verdict.FAIL:
-          console.log('you have failed!');
+          this._writeScreenMessage(failMessage);
           break;
         case Verdict.PAUSE:
-          console.log('game is on pause!');
+          this._writeScreenMessage(pauseMessage);
           break;
         case Verdict.INTRO:
-          console.log('welcome to the game! Press Space to start');
+          this._writeScreenMessage(introMessage);
           break;
       }
     },
