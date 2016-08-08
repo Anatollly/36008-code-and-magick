@@ -420,7 +420,7 @@ window.Game = (function() {
         }
       }
 
-      var messageHeight = lines.length * 24 + 20;
+      var messageHeight = lines.length * 24 + 20; // было реализовано ранее
 
       this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
       this.ctx.fillRect(320, 70, messageWidth, messageHeight);
