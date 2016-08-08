@@ -394,10 +394,9 @@ window.Game = (function() {
     /**
      * Отрисовка экрана паузы.
      */
-    _writeScreenMessage: function(message) {
+    _writeScreenMessage: function(message, messageWidth) {
 
       var lines = [];
-      var messageWidth = 300;
       var words = message.split(' ');
       var line = '';
 
@@ -440,19 +439,20 @@ window.Game = (function() {
       var failMessage = 'Не получилось, не рассраивайся. Нажми на пробел, чтобы победить.';
       var pauseMessage = 'Игра на паузе. Нажми на пробел чтобы вернуться и помочь Пенадьфу победить.';
       var introMessage = 'Привет, я Пендальф Синий. Помоги мне изменить мир. Для начали игры нажми на пробел. Можешь управлять моими ' + 'перемещениями c помощью стрелок. И я буду стрелять огненными шарами по клику на кнопку Shift.';
+      var messageWidth = 300;
 
       switch (this.state.currentStatus) {
         case Verdict.WIN:
-          this._writeScreenMessage(winMessage);
+          this._writeScreenMessage(winMessage, messageWidth);
           break;
         case Verdict.FAIL:
-          this._writeScreenMessage(failMessage);
+          this._writeScreenMessage(failMessage, messageWidth);
           break;
         case Verdict.PAUSE:
-          this._writeScreenMessage(pauseMessage);
+          this._writeScreenMessage(pauseMessage, messageWidth);
           break;
         case Verdict.INTRO:
-          this._writeScreenMessage(introMessage);
+          this._writeScreenMessage(introMessage, messageWidth);
           break;
       }
     },
