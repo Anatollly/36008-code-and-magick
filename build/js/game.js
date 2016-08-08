@@ -401,9 +401,10 @@ window.Game = (function() {
       var words = message.split(' ');
       var line = '';
 
+      this.ctx.font = '16px "PT Mono"';
+
       for (var i = 0; i < words.length; i++) {
         var testLine = line + words[i] + ' ';
-        this.ctx.font = '16px "PT Mono"';
         var testWidth = this.ctx.measureText(testLine).width;
         if ((testWidth > (messageWidth - 20)) && (i === words.length - 1)) {
           lines.push(line);
@@ -420,6 +421,7 @@ window.Game = (function() {
         }
       }
 
+      var messageHeight = lines.length * 24 + 20;
 
       this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
       this.ctx.fillRect(320, 70, messageWidth, messageHeight);
@@ -428,6 +430,7 @@ window.Game = (function() {
       this.ctx.fillStyle = '#000000';
       this.ctx.textBaseline = 'hanging';
       for (var j = 0; j < lines.length; j++) {
+        this.ctx.fillText(lines[j], 320, 50 + (j + 1) * 24);
       }
     },
 
@@ -436,6 +439,7 @@ window.Game = (function() {
       var winMessage = 'Ура! Ты победил. Нажми на пробел, чтобы повторить свой успех.';
       var failMessage = 'Не получилось, не рассраивайся. Нажми на пробел, чтобы победить.';
       var pauseMessage = 'Игра на паузе. Нажми на пробел чтобы вернуться и помочь Пенадьфу победить.';
+      var introMessage = 'Привет, я Пендальф Синий. Помоги мне изменить мир. Для начали игры нажми на Shift. Можешь управлять моими ' + 'перемещениями c помощью стрелок. И я буду стрелять огненными шарами по клику на кнопку Shift.';
 
       switch (this.state.currentStatus) {
         case Verdict.WIN:
