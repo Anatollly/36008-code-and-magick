@@ -394,10 +394,9 @@ window.Game = (function() {
     /**
      * Отрисовка экрана паузы.
      */
-    _writeScreenMessage: function(message) {
+    _writeScreenMessage: function(message, messageWidth) {
 
       var lines = [];
-      var messageWidth = 300;
       var words = message.split(' ');
       var line = '';
 
@@ -443,16 +442,16 @@ window.Game = (function() {
 
       switch (this.state.currentStatus) {
         case Verdict.WIN:
-          this._writeScreenMessage(winMessage);
+          this._writeScreenMessage(winMessage, 300);
           break;
         case Verdict.FAIL:
-          this._writeScreenMessage(failMessage);
+          this._writeScreenMessage(failMessage, 300);
           break;
         case Verdict.PAUSE:
-          this._writeScreenMessage(pauseMessage);
+          this._writeScreenMessage(pauseMessage, 300);
           break;
         case Verdict.INTRO:
-          this._writeScreenMessage(introMessage);
+          this._writeScreenMessage(introMessage, 300);
           break;
       }
     },
