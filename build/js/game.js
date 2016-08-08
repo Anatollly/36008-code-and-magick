@@ -396,7 +396,6 @@ window.Game = (function() {
      */
     _writeScreenMessage: function(message) {
 
-      var lineHeight = 24;
       var lines = [];
       var messageWidth = 300;
       var words = message.split(' ');
@@ -421,7 +420,6 @@ window.Game = (function() {
         }
       }
 
-      var messageHeight = lines.length * lineHeight + 20;
 
       this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
       this.ctx.fillRect(320, 70, messageWidth, messageHeight);
@@ -430,8 +428,6 @@ window.Game = (function() {
       this.ctx.fillStyle = '#000000';
       this.ctx.textBaseline = 'hanging';
       for (var j = 0; j < lines.length; j++) {
-        this.ctx.fillText(lines[j], 320, 50 + lineHeight);
-        lineHeight += 24;
       }
     },
 
@@ -440,8 +436,6 @@ window.Game = (function() {
       var winMessage = 'Ура! Ты победил. Нажми на пробел, чтобы повторить свой успех.';
       var failMessage = 'Не получилось, не рассраивайся. Нажми на пробел, чтобы победить.';
       var pauseMessage = 'Игра на паузе. Нажми на пробел чтобы вернуться и помочь Пенадьфу победить.';
-      var introMessage = 'Привет, я Пендальф Синий. Помоги мне изменить мир. Можешь управлять моими ' +
-        'перемещениями c помощью стрелок. И я буду стрелять огненными шарами по клику на кнопку Shift.';
 
       switch (this.state.currentStatus) {
         case Verdict.WIN:
